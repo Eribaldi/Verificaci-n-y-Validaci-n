@@ -9,7 +9,7 @@ public class DBConnection {
     private static Connection conn;
     private static String url = "jdbc:postgresql://localhost:5432/ventas";
     private static String user = "postgres";
-    private static String pass = "wilpolanco";
+    private static String pass = "Pass@123";
     /*
     private static String url = "jdbc:mysql://localhost/sysventas";
     private static String user = "root";
@@ -31,9 +31,9 @@ public class DBConnection {
 	}
 	
     public static Connection getConnection() throws SQLException, ClassNotFoundException{
-        if(conn !=null && !conn.isClosed())
-            return conn;
+        if(conn !=null && !conn.isClosed()){
             connect();
-            return conn;
+        }
+        return conn;
     }
 }
