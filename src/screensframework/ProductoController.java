@@ -72,7 +72,7 @@ public class ProductoController implements Initializable, ControlledScreen {
             conexion = DBConnection.connect();
             
             // COMBOBOX DE CATEGORIA
-            String slqCategoria = "SELECT idcategoria, nombre_categoria FROM category";
+            String slqCategoria = "SELECT idcategoria, nombre_categoria FROM categoria";
             ResultSet resultadoCategoria = conexion.createStatement().executeQuery(slqCategoria);
             while(resultadoCategoria.next()) {
                 cbCategoriaProducto.getItems().add(resultadoCategoria.getString("nombre_categoria"));
@@ -266,7 +266,7 @@ public class ProductoController implements Initializable, ControlledScreen {
         
         try {
             conexion = DBConnection.connect();
-            String sql = "INSERT INTO product "
+            String sql = "INSERT INTO producto "
                     + " (nombre_producto, precio, idcategoria, idmarca) "
                     + " VALUES (?, ?, ?, ?)";
             PreparedStatement estado = conexion.prepareStatement(sql);
