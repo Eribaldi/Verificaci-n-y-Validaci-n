@@ -16,7 +16,7 @@ public class ControlesBasicos {
     public void salirSistema() {
         int pregunta = JOptionPane.showConfirmDialog(null, "Realmente desea salir del programa?");
         
-        if (pregunta == 1) {
+        if (pregunta == 0) {
             Platform.exit();
         } 
     }

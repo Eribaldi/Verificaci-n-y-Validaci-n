@@ -82,7 +82,11 @@ public class Validaciones {
     /****** PASSWORD *********/
     public boolean validaPassword(String pass1, String pass2) {
         
-        if (pass1 == null ? pass2 != null : !pass1.equals(pass2)) {
+        if(pass1 == null || pass1.length() < 5){
+            JOptionPane.showMessageDialog(null, "La contraseña debe ser igual o mayor a 5 caracteres");
+            return false;        
+        }
+        if (!pass1.equals(pass2)) {
             JOptionPane.showMessageDialog(null, "Las contraseñas deben ser iguales");
             return false;
         }
