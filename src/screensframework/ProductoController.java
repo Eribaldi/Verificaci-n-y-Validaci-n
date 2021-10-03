@@ -165,7 +165,7 @@ public class ProductoController implements Initializable, ControlledScreen {
             while(rs.next()){
                 //Iterate Row
                 ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i = 1 ; i <= rs.getMetaData().getColumnCount()+1; i++){
+                for(int i = 1 ; i < rs.getMetaData().getColumnCount()+1; i++){
                     //Iterate Column
                     row.add(rs.getString(i));
                 }
