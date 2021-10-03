@@ -39,10 +39,10 @@ public class ProductoController implements Initializable, ControlledScreen {
     @FXML private Button btEliminarProducto;
     @FXML private Button btNuevoProducto;
     
-    @FXML private TextField tfNombreProducto;
     @FXML private TextField tfPrecioProducto;
     @FXML private TextField tfBuscarProducto;
     @FXML private ComboBox cbCategoriaProducto;
+    @FXML private TextField tfNombreProducto;
     @FXML private ComboBox cbMarcaProducto;
     @FXML private Label lbCodigoProducto;
     
@@ -51,11 +51,9 @@ public class ProductoController implements Initializable, ControlledScreen {
     private Connection conexion;
     
     ObservableList<ObservableList> producto;
-    
-    
+        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         this.cargarDatosTabla();
         
         btEliminarProducto.setDisable(true);
@@ -261,6 +259,9 @@ public class ProductoController implements Initializable, ControlledScreen {
     @FXML
     private void addProducto(ActionEvent event) {
         
+        if(!esNumero(tfPrecioProducto.getText())) return;
+        System.out.println("Precio:  " + tfPrecioProducto.getText() );
+
         int indiceCategoria = cbCategoriaProducto.getSelectionModel().getSelectedIndex() + 1;
         int indiceMarca = cbMarcaProducto.getSelectionModel().getSelectedIndex() + 1;
         
@@ -350,7 +351,9 @@ public class ProductoController implements Initializable, ControlledScreen {
                 }
 
                 estado.close();
-
+                
+                limpiarProductoSeleccionado();
+                
             } catch (SQLException e) {
                 System.out.println("Error " + e);
             }
@@ -407,6 +410,7 @@ public class ProductoController implements Initializable, ControlledScreen {
         btAddProducto.setStyle("-fx-background-color:#66CCCC");
         btEliminarProducto.setStyle("-fx-background-color:grey");
         btModificarProducto.setStyle("-fx-background-color:grey");
+        limpiarProductoSeleccionado();
     }
     
     @FXML
@@ -423,5 +427,34 @@ public class ProductoController implements Initializable, ControlledScreen {
     private void cerrarSesion(ActionEvent event) {
         
         controlador.setScreen(ScreensFramework.loginID);
+    }    
+    
+    @FXML
+    private void limpiarProductoSeleccionado() {
+        lbCodigoProducto.setText("");
+        lbCodigoProducto.setText("");
+        tfNombreProducto.setText("");
+        tfPrecioProducto.setText("");
+        cbMarcaProducto.getSelectionModel().clearSelection();
+        cbCategoriaProducto.getSelectionModel().clearSelection();
     }
+    
+    public static boolean esNumero(String string) {
+    int intValue;
+		
+    System.out.println(String.format("Parsing string: \"%s\"", string));
+		
+    if(string == null || string.equals("")) {
+        System.out.println("String cannot be parsed, it is null or empty.");
+        return false;
+    }
+    
+    try {
+        intValue = Integer.parseInt(string);
+        return true;
+    } catch (NumberFormatException e) {
+        System.out.println("Input String cannot be parsed to Integer.");
+    }
+    return false;
+}
 }
